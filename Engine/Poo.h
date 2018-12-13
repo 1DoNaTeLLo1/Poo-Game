@@ -7,15 +7,15 @@ class Poo
 private:
 	static constexpr int width = 23;
 	static constexpr int height = 23;
-	int x;
-	int y;
-	int vx;
-	int vy;
+	float x;
+	float y;
+	float vx;
+	float vy;
 	bool isEaten = false;
 	bool isInit = false;
 
 public:
-	void Init(int in_x, int in_y, int in_vx, int in_vy);
+	void Init(float in_x, float in_y, float in_vx, float in_vy);
 	void Update();
 	void BorderTest();
 	void CollusionTest(Face& face);

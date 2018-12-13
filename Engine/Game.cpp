@@ -28,15 +28,15 @@ Game::Game(MainWindow& wnd)
 	rn(rd()),
 	xDist(0, 770),
 	yDist(0, 570),
-	vxDist(-1, 1),
-	vyDist(-1, 1)
+	vxDist(-2.5f, 2.5f),
+	vyDist(-2.5f, 2.5f)
 {
 	for (int i = 0; i < size; i++)
 	{
-		poo[i].Init(xDist(rn), yDist(rn), vxDist(rn), vyDist(rn));
+		poo[i].Init(float(xDist(rn)), float(yDist(rn)), vxDist(rn), vyDist(rn));
 	}
 
-	bait.Init();
+	bait.Init(rn, xDist, yDist);
 }
 
 void Game::Go()
@@ -59,7 +59,7 @@ void Game::UpdateModel()
 
 	if (bait.CollusionTest(face))
 	{
-		bait.Init();
+		bait.Init(rn, xDist, yDist);
 
 		score.IncreaseScore();
 	}

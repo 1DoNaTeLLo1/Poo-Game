@@ -1,33 +1,27 @@
 #include "Bait.h"
 
-Bait::Bait() :
-	rn(rd()),
-	xDist(0, 770),
-	yDist(0, 570)
-{ }
-
-void Bait::Init()
+void Bait::Init(std::mt19937& rn, std::uniform_int_distribution<int>& xDist, std::uniform_int_distribution<int>& yDist)
 {
-	x = xDist(rn);
-	y = yDist(rn);
+	x = float(xDist(rn));
+	y = float(yDist(rn));
 }
 
 void Bait::Draw(Graphics& gfx) const
 {
-	gfx.DrawRectDim(x, y, side, side, c);
+	gfx.DrawRectDim(int(x), int(y), side, side, c);
 }
 
 bool Bait::CollusionTest(Face face) const
 {
-	int box0_left = x;
-	int box0_right = x + side;
-	int box0_up = y;
-	int box0_down = y + side;
-
-	int box1_left = face.GetX();
-	int box1_right = face.GetX() + face.GetWidth();
-	int box1_up = face.GetY();
-	int box1_down = face.GetY() + face.GetHeight();
+	float box0_left = x;
+	float box0_right = x + float(side);
+	float box0_up = y;
+	float box0_down = y + float(side);
+	
+	float box1_left = face.GetX();
+	float box1_right = face.GetX() + float(face.GetWidth());
+	float box1_up = face.GetY();
+	float box1_down = face.GetY() + float(face.GetHeight());
 
 	return	box0_left <= box1_right &&
 		box0_right >= box1_left &&

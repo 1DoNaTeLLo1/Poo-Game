@@ -55,8 +55,8 @@ private:
 	std::mt19937 rn;
 	std::uniform_int_distribution<int> xDist;
 	std::uniform_int_distribution<int> yDist;
-	std::uniform_int_distribution<int> vxDist;
-	std::uniform_int_distribution<int> vyDist;
+	std::uniform_real_distribution<float> vxDist;
+	std::uniform_real_distribution<float> vyDist;
 
 	static constexpr int size = 10;
 

@@ -7,14 +7,8 @@
 class Bait
 {
 private:
-	std::random_device rd;
-	std::mt19937 rn;
-	std::uniform_int_distribution<int> xDist;
-	std::uniform_int_distribution<int> yDist;
-
-
-	int x;
-	int y;
+	float x;
+	float y;
 	Color c = Colors::Red;
 	bool isWhite = false;
 	bool isRed = true;
@@ -22,8 +16,7 @@ private:
 	static constexpr int side = 20;
 
 public:
-	Bait();
-	void Init();
+	void Init(std::mt19937& rn, std::uniform_int_distribution<int>& xDist, std::uniform_int_distribution<int>& yDist);
 	void Draw(Graphics& gfx) const;
 	bool CollusionTest(Face face) const;
 	void Update();
