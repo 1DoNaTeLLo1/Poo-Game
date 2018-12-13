@@ -20,9 +20,16 @@
  ******************************************************************************************/
 #pragma once
 
+#include <random>
+
+#include "MainWindow.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "Face.h"
+#include "Poo.h"
+#include "Bait.h"
+#include "Score.h"
 
 class Game
 {
@@ -36,11 +43,29 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
+	void DrawTitle(int x, int y);
+	void DrawGO(int x, int y);
 	/********************************/
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	std::random_device rd;
+	std::mt19937 rn;
+	std::uniform_int_distribution<int> xDist;
+	std::uniform_int_distribution<int> yDist;
+	std::uniform_int_distribution<int> vxDist;
+	std::uniform_int_distribution<int> vyDist;
+
+	static constexpr int size = 10;
+
+	Face face;
+	Poo poo[size];
+	Bait bait;
+	Score score;
+
+	bool showTitle = true;
+	bool gameOver = false;
 	/********************************/
 };
