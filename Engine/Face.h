@@ -7,6 +7,7 @@ class Face
 private:
 	float x = 400.0f;
 	float y = 300.0f;
+	float speed = 1.0f * 60.0f;
 	static constexpr int width = 19;
 	static constexpr int height = 19;
 

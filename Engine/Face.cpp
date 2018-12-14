@@ -348,19 +348,19 @@ void Face::Update(MainWindow& wnd, float dt)
 {
 	if (wnd.kbd.KeyIsPressed(VK_UP))
 	{
-		y -= dt * 60.0f;
+		y -= speed * dt;
 	}
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
-		y += dt * 60.0f;
+		y += speed * dt;
 	}
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
-		x += dt * 60.0f;
+		x += speed * dt;
 	}
 	if (wnd.kbd.KeyIsPressed(VK_LEFT))
 	{
-		x -= dt * 60.0f;
+		x -= speed * dt;
 	}
 }
 
