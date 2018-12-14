@@ -49,6 +49,8 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float dt = frametimer.Mark();
+
 	if (showTitle)
 	{
 		showTitle = !wnd.kbd.KeyIsPressed(VK_RETURN);

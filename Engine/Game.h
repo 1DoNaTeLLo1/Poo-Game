@@ -31,6 +31,7 @@
 #include "Bait.h"
 #include "Score.h"
 #include "SpriteCodex.h"
+#include "FrameTimer.h"
 
 class Game
 {
@@ -50,6 +51,8 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	FrameTimer frametimer;
+
 	std::random_device rd;
 	std::mt19937 rn;
 	std::uniform_int_distribution<int> xDist;
