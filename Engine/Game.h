@@ -30,6 +30,7 @@
 #include "Poo.h"
 #include "Bait.h"
 #include "Score.h"
+#include "SpriteCodex.h"
 
 class Game
 {
@@ -43,8 +44,6 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
-	void DrawTitle(int x, int y);
-	void DrawGO(int x, int y);
 	/********************************/
 private:
 	MainWindow& wnd;

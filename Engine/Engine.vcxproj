@@ -150,6 +150,7 @@
     <ClInclude Include="Poo.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Score.h" />
+    <ClInclude Include="SpriteCodex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bait.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Poo.cpp" />
     <ClCompile Include="Score.cpp" />
+    <ClCompile Include="SpriteCodex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
