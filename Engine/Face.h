@@ -13,7 +13,7 @@ private:
 public:
 	void BorderTest();
 	void Draw(Graphics& gfx) const;
-	void Update(MainWindow& wnd);
+	void Update(MainWindow& wnd, float dt);
 	float GetX() const;
 	float GetY() const;
 	const int GetWidth() const;

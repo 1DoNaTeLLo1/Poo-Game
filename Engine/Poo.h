@@ -16,7 +16,7 @@ private:
 
 public:
 	void Init(float in_x, float in_y, float in_vx, float in_vy);
-	void Update();
+	void Update(float dt);
 	void BorderTest();
 	void CollusionTest(Face& face);
 	void Draw(Graphics& gfx) const;

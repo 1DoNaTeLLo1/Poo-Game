@@ -344,23 +344,23 @@ void Face::Draw(Graphics& gfx) const
 	gfx.PutPixel(12 + x_int, 19 + y_int, 0, 0, 0);
 }
 
-void Face::Update(MainWindow& wnd)
+void Face::Update(MainWindow& wnd, float dt)
 {
 	if (wnd.kbd.KeyIsPressed(VK_UP))
 	{
-		y--;
+		y -= dt * 60.0f;
 	}
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
-		y++;
+		y += dt * 60.0f;
 	}
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
-		x++;
+		x += dt * 60.0f;
 	}
 	if (wnd.kbd.KeyIsPressed(VK_LEFT))
 	{
-		x--;
+		x -= dt * 60.0f;
 	}
 }
 

@@ -28,8 +28,8 @@ Game::Game(MainWindow& wnd)
 	rn(rd()),
 	xDist(0, 770),
 	yDist(0, 570),
-	vxDist(-2.5f, 2.5f),
-	vyDist(-2.5f, 2.5f)
+	vxDist(-2.5f * 60.0f, 2.5f * 60.0f),
+	vyDist(-2.5f * 60.0f, 2.5f * 60.0f)
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -56,7 +56,7 @@ void Game::UpdateModel()
 		showTitle = !wnd.kbd.KeyIsPressed(VK_RETURN);
 	}
 
-	face.Update(wnd);
+	face.Update(wnd,dt);
 	face.BorderTest();
 
 	if (bait.CollusionTest(face))
@@ -70,7 +70,7 @@ void Game::UpdateModel()
 
 	for (int i = 0; i < size; i++)
 	{
-		poo[i].Update();
+		poo[i].Update(dt);
 		poo[i].CollusionTest(face);
 
 		if (poo[i].IsEaten())
