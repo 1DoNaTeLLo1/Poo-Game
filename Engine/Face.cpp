@@ -1,30 +1,35 @@
 #include "Face.h"
 
+Face::Face()
+{
+	loc = Vec2(400, 300);
+}
+
 void Face::BorderTest()
 {
-	if (x < 0)
+	if (loc.x < 0)
 	{
-		x = 0;
+		loc.x = 0;
 	}
-	else if (x + width >= Graphics::ScreenWidth)
+	else if (loc.x + width >= Graphics::ScreenWidth)
 	{
-		x = Graphics::ScreenWidth - 1 - width;
+		loc.x = Graphics::ScreenWidth - 1 - width;
 	}
 
-	if (y < 0)
+	if (loc.y < 0)
 	{
-		y = 0;
+		loc.y = 0;
 	}
-	else if (y + height >= Graphics::ScreenHeight)
+	else if (loc.y + height >= Graphics::ScreenHeight)
 	{
-		y = Graphics::ScreenHeight - 1 - height;
+		loc.y = Graphics::ScreenHeight - 1 - height;
 	}
 }
 
 void Face::Draw(Graphics& gfx) const
 {
-	int x_int = int(x);
-	int y_int = int(y);
+	int x_int = int(loc.x);
+	int y_int = int(loc.y);
 
 	gfx.PutPixel(7 + x_int, 0 + y_int, 0, 0, 0);
 	gfx.PutPixel(8 + x_int, 0 + y_int, 0, 0, 0);
@@ -348,30 +353,39 @@ void Face::Update(MainWindow& wnd, float dt)
 {
 	if (wnd.kbd.KeyIsPressed(VK_UP))
 	{
-		y -= speed * dt;
+		vel.x = 0;
+		vel.y = -1;
+
+		loc += vel;
 	}
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
-		y += speed * dt;
+		vel.x = 0;
+		vel.y = 1;
+
+		loc += vel;
 	}
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
-		x += speed * dt;
+		vel.x = 1;
+		vel.y = 0;
+
+		loc += vel;
 	}
 	if (wnd.kbd.KeyIsPressed(VK_LEFT))
 	{
-		x -= speed * dt;
+		vel.x = -1;
+		vel.y = 0;
+
+		loc += vel;
 	}
+
+	vel = Vec2(0.0f, 0.0f);
 }
 
-float Face::GetX() const
+Vec2 Face::GetLocation() const
 {
-	return x;
-}
-
-float Face::GetY() const
-{
-	return y;
+	return loc;
 }
 
 const int Face::GetWidth() const

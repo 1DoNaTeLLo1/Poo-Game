@@ -3,12 +3,12 @@
 #include "Graphics.h"
 #include "Face.h"
 #include "Colors.h"
+#include "Vec2.h"
 
 class Bait
 {
 private:
-	float x;
-	float y;
+	Vec2 loc;
 	Color c = Colors::Red;
 	bool isWhite = false;
 	bool isRed = true;
@@ -16,7 +16,8 @@ private:
 	static constexpr int side = 20;
 
 public:
-	void Init(std::mt19937& rn, std::uniform_int_distribution<int>& xDist, std::uniform_int_distribution<int>& yDist);
+	Bait(Vec2 loc_ini);
+	void Respawn(Vec2 loc_ini);
 	void Draw(Graphics& gfx) const;
 	bool CollusionTest(Face face) const;
 	void Update();

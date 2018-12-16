@@ -1,68 +1,66 @@
 #include "Poo.h"
 
-void Poo::Init(float in_x, float in_y, float in_vx, float in_vy)
+void Poo::Init(Vec2 loc_ini, Vec2 vel_ini)
 {
 	if (!isInit)
 	{
-		x = in_x;
-		y = in_y;
-		vx = in_vx;
-		vy = in_vy;
+		loc = loc_ini;
+		vel = vel_ini;
 	}
 }
 
 void Poo::Update(float dt)
 {
-	x += vx * dt;
-	y += vy * dt;
+	loc += vel * dt;
 
-	const float old_x = x;
-	const float old_y = y;
+	const Vec2 old_loc = loc;
 
 	BorderTest();
 
-	if (x != old_x)
+	if (loc.x != old_loc.x)
 	{
-		vx = -vx;
+		vel.x = -vel.x;
 	}
-	if (y != old_y)
+	if (loc.y != old_loc.y)
 	{
-		vy = -vy;
+		vel.y = -vel.y;
 	}
 }
 
 void Poo::BorderTest()
 {
-	if (x < 0)
+	if (loc.x < 0)
 	{
-		x = 0;
+		loc.x = 0;
 	}
-	else if (x + width >= Graphics::ScreenWidth)
+	else if (loc.x + width >= Graphics::ScreenWidth)
 	{
-		x = Graphics::ScreenWidth - 1 - width;
+		loc.x = Graphics::ScreenWidth - 1 - width;
 	}
 
-	if (y < 0)
+	if (loc.y < 0)
 	{
-		y = 0;
+		loc.y = 0;
 	}
-	else if (y + height >= Graphics::ScreenHeight)
+	else if (loc.y + height >= Graphics::ScreenHeight)
 	{
-		y = Graphics::ScreenHeight - 1 - height;
+		loc.y = Graphics::ScreenHeight - 1 - height;
 	}
 }
 
 void Poo::CollusionTest(Face& face)
 {
-	float box0_left = x;
-	float box0_right = x + float(width);
-	float box0_up = y;
-	float box0_down = y + float(height);
+	float box0_left = loc.x;
+	float box0_right = loc.x + float(width);
+	float box0_up = loc.y;
+	float box0_down = loc.y + float(height);
 
-	float box1_left = face.GetX();
-	float box1_right = face.GetX() + face.GetWidth();
-	float box1_up = face.GetY();
-	float box1_down = face.GetY() + face.GetHeight();
+	Vec2 face_loc = face.GetLocation();
+
+	float box1_left = face_loc.x;
+	float box1_right = face_loc.x + face.GetWidth();
+	float box1_up = face_loc.y;
+	float box1_down = face_loc.y + face.GetHeight();
 
 	if (box0_left <= box1_right &&
 		box0_right >= box1_left &&
@@ -75,8 +73,8 @@ void Poo::CollusionTest(Face& face)
 
 void Poo::Draw(Graphics& gfx) const
 {
-	int x_int = int(x);
-	int y_int = int(y);
+	int x_int = int(loc.x);
+	int y_int = int(loc.y);
 
 	gfx.PutPixel(14 + x_int, 0 + y_int, 138, 77, 0);
 	gfx.PutPixel(7 + x_int, 1 + y_int, 138, 77, 0);

@@ -1,27 +1,33 @@
 #include "Bait.h"
 
-void Bait::Init(std::mt19937& rn, std::uniform_int_distribution<int>& xDist, std::uniform_int_distribution<int>& yDist)
+Bait::Bait(Vec2 loc_ini)
 {
-	x = float(xDist(rn));
-	y = float(yDist(rn));
+	loc = loc_ini;
+}
+
+void Bait::Respawn(Vec2 loc_ini)
+{
+	loc = loc_ini;
 }
 
 void Bait::Draw(Graphics& gfx) const
 {
-	gfx.DrawRectDim(int(x), int(y), side, side, c);
+	gfx.DrawRectDim(int(loc.x), int(loc.y), side, side, c);
 }
 
 bool Bait::CollusionTest(Face face) const
 {
-	float box0_left = x;
-	float box0_right = x + float(side);
-	float box0_up = y;
-	float box0_down = y + float(side);
+	float box0_left = loc.x;
+	float box0_right = loc.x + float(side);
+	float box0_up = loc.y;
+	float box0_down = loc.y + float(side);
+
+	Vec2 face_loc = face.GetLocation();
 	
-	float box1_left = face.GetX();
-	float box1_right = face.GetX() + float(face.GetWidth());
-	float box1_up = face.GetY();
-	float box1_down = face.GetY() + float(face.GetHeight());
+	float box1_left = face_loc.x;
+	float box1_right = face_loc.x + face.GetWidth();
+	float box1_up = face_loc.y;
+	float box1_down = face_loc.y + face.GetHeight();
 
 	return	box0_left <= box1_right &&
 		box0_right >= box1_left &&

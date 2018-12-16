@@ -29,14 +29,13 @@ Game::Game(MainWindow& wnd)
 	xDist(0, 770),
 	yDist(0, 570),
 	vxDist(-2.5f * 60.0f, 2.5f * 60.0f),
-	vyDist(-2.5f * 60.0f, 2.5f * 60.0f)
+	vyDist(-2.5f * 60.0f, 2.5f * 60.0f),
+	bait(Vec2(float(xDist(rn)), float(yDist(rn))))
 {
 	for (int i = 0; i < size; i++)
 	{
-		poo[i].Init(float(xDist(rn)), float(yDist(rn)), vxDist(rn), vyDist(rn));
+		poo[i].Init(Vec2(float(xDist(rn)), float(yDist(rn))), Vec2(float(vxDist(rn)), float(vyDist(rn))));
 	}
-
-	bait.Init(rn, xDist, yDist);
 }
 
 void Game::Go()
@@ -61,7 +60,7 @@ void Game::UpdateModel()
 
 	if (bait.CollusionTest(face))
 	{
-		bait.Init(rn, xDist, yDist);
+		bait.Respawn(Vec2( float(xDist(rn)), float(yDist(rn)) ));
 
 		score.IncreaseScore();
 	}
