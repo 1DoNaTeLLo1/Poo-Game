@@ -351,36 +351,40 @@ void Face::Draw(Graphics& gfx) const
 
 void Face::Update(MainWindow& wnd, float dt)
 {
-	if (wnd.kbd.KeyIsPressed(VK_UP))
+	if (wnd.mouse.LeftIsPressed())
 	{
-		vel.x = 0;
-		vel.y = -1;
+		Vec2 mouse_loc(float(wnd.mouse.GetPosX()), float(wnd.mouse.GetPosY()));
+		Vec2 mid_loc = loc + Vec2(width / 2, height / 2);
+		Vec2 toPointer = mouse_loc - mid_loc;
 
-		loc += vel;
+		if (toPointer.GetLength() >= 1)
+		{
+			loc += toPointer.GetNormalized() * speed * dt;
+		}
 	}
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	else
 	{
-		vel.x = 0;
-		vel.y = 1;
+		Vec2 vel(0.0f, 0.0f);
 
-		loc += vel;
+		if (wnd.kbd.KeyIsPressed(VK_UP))
+		{
+			vel += Vec2(0.0f, -1.0f);
+		}
+		if (wnd.kbd.KeyIsPressed(VK_DOWN))
+		{
+			vel += Vec2(0.0f, 1.0f);
+		}
+		if (wnd.kbd.KeyIsPressed(VK_LEFT))
+		{
+			vel += Vec2(-1.0f, 0.0f);
+		}
+		if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+		{
+			vel += Vec2(1.0f, 0.0f);
+		}
+
+		loc += vel.GetNormalized() * speed * dt;
 	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		vel.x = 1;
-		vel.y = 0;
-
-		loc += vel;
-	}
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		vel.x = -1;
-		vel.y = 0;
-
-		loc += vel;
-	}
-
-	vel = Vec2(0.0f, 0.0f);
 }
 
 Vec2 Face::GetLocation() const

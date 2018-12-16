@@ -7,7 +7,7 @@ class Face
 {
 private:
 	Vec2 loc;
-	Vec2 vel;
+	float speed = 1.0f * 60.0f;
 	static constexpr int width = 19;
 	static constexpr int height = 19;
 
