@@ -32,6 +32,7 @@
 #include "Score.h"
 #include "SpriteCodex.h"
 #include "FrameTimer.h"
+#include "Vec2.h"
 
 class Game
 {
